@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: melvyn920
+  role_name: wordpress
+  description: Rôle pour installer WordPress + MariaDB sur Ubuntu & Rocky Linux
+  license: MIT
+  min_ansible_version: 2.9
+  platforms:
+    - name: Debian
+      versions:
+        - buster
+        - bullseye
+    - name: EL
+      versions:
+        - 8
+        - 9
+  namespace: melvyn920
+
+dependencies: []

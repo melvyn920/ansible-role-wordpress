@@ -1,0 +1,38 @@
+---
+- name: Installer paquets Ubuntu/Debian
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - apache2
+    - php
+    - php-mysql
+    - mariadb-server
+    - unzip
+  when: "'ubuntu' in group_names"
+
+- name: Installer paquets Rocky
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - httpd
+    - php
+    - php-mysqlnd
+    - mariadb-server
+    - unzip
+  when: "'rocky' in group_names"
+
+- name: Télécharger WordPress
+  get_url:
+    url: https://wordpress.org/latest.zip
+    dest: /tmp/wordpress.zip
+    mode: '0644'
+    force: yes
+
+- name: Décompresser WordPress
+  unarchive:
+    src: /tmp/wordpress.zip
+    dest: /var/www/html/
+    remote_src: yes
