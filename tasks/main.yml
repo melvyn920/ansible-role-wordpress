@@ -36,3 +36,13 @@
     src: /tmp/wordpress.zip
     dest: /var/www/html/
     remote_src: yes
+
+- name: Démarrer Apache (Ubuntu sans systemd)
+  command: service apache2 start
+  when: "'ubuntu' in group_names"
+
+- name: Démarrer httpd (Rocky sans systemd)
+  command: /usr/sbin/httpd -DFOREGROUND &
+  async: 0
+  poll: 0
+  when: "'rocky' in group_names"
